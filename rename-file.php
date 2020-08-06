@@ -28,20 +28,22 @@ function renameImage($name,$newName)
 function saveProductNames()
 {
 	require_once('databaseConnection.php');
-	$sql = "SELECT NombreProducto FROM productos";
-	$result = mysqli_query($conn, $sql);
+	$productNames = array();
+	$query = "SELECT NombreProducto FROM productos";
+	$result = mysqli_query($conn, $query);
 
 	if (mysqli_num_rows($result) > 0) 
 	{
   		// output data of each row
   		while($row = mysqli_fetch_assoc($result)) 
   		{
-    		echo $row['NombreProducto'];
+    		array_push($productNames, $row['NombreProducto']);
   		}
 	} 
 	else {
  	 	echo "0 results";
 	}
+	var_dump($productNames);
 	mysqli_close($conn);
 }
 
